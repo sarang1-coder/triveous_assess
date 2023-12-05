@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { fetchData } from '../../utils/slice/dataSlice'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Modal, Backdrop } from './Modal'
+import { Button } from '@mui/material'
 
 const TopHeadlines = () => {
   const headerStyle = {
@@ -13,6 +14,9 @@ const TopHeadlines = () => {
     marginBottom: '0',
     textTransform: 'uppercase',
   }
+
+  const [currentPage, setCurrentPage] = useState(1)
+  const itemsPerPage = 6
 
   const [selectedId, setSelectedId] = useState(null)
   const [showModal, setShowModal] = useState(false)
@@ -25,6 +29,15 @@ const TopHeadlines = () => {
   useEffect(() => {
     dispatch(fetchData())
   }, [dispatch])
+
+  const indexOfLastItem = currentPage * itemsPerPage
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage
+  const currentItems = info.slice(indexOfFirstItem, indexOfLastItem)
+
+  const paginate = (pageNumber) => {
+    setCurrentPage(pageNumber)
+    setSelectedId(null)
+  }
 
   const handleCloseModal = () => {
     setSelectedId(null)
@@ -45,7 +58,7 @@ const TopHeadlines = () => {
           justifyContent: 'space-evenly',
         }}
       >
-        {info?.map((item, idx) => (
+        {currentItems?.map((item, idx) => (
           <motion.div
             key={idx}
             layoutId={idx}
@@ -68,6 +81,7 @@ const TopHeadlines = () => {
                 borderTopLeftRadius: '8px',
                 borderTopRightRadius: '8px',
                 height: '150px',
+                border: '1px solid black',
               }}
             ></div>
             <div style={{ padding: '16px', flexGrow: 1 }}>
@@ -93,6 +107,31 @@ const TopHeadlines = () => {
             </>
           )}
         </AnimatePresence>
+      </div>
+      {/* pagination */}
+      <div
+        style={{
+          display: 'flex',
+          justifyContent: 'center',
+          marginTop: '20px',
+        }}
+      >
+        {Array.from(
+          { length: Math.ceil(info.length / itemsPerPage) },
+          (_, index) => (
+            <Button
+              key={index}
+              onClick={() => paginate(index + 1)}
+              style={{
+                margin: '0 5px',
+                backgroundColor: 'white',
+                margin: '1rem',
+              }}
+            >
+              {index + 1}
+            </Button>
+          ),
+        )}
       </div>
     </div>
   )

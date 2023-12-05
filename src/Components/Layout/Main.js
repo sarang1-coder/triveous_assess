@@ -4,8 +4,9 @@ import Topheadlines from './Topheadlines'
 
 export const Main = () => {
   const mainStyle = {
-    backgroundColor: 'wheat',
-    height: '100vh',
+    minHeight: '100vh',
+    overflowY: 'auto',
+    backgroundColor:'wheat'
   }
 
   const buttonStyle = {
@@ -77,7 +78,7 @@ export const Main = () => {
           />
         </div>
       </div>
-      <Topheadlines/>
+      <Topheadlines />
     </div>
   )
 }

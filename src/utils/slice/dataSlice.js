@@ -1,8 +1,8 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
-import { fetchDataFromApi } from '../api/apiService'
+import { fetchAllData } from '../api/apiService'
 
 export const fetchData = createAsyncThunk('data/fetchData', async () => {
-  const response = await fetchDataFromApi()
+  const response = await fetchAllData()
   return response
 })
 

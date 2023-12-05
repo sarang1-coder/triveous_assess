@@ -15,8 +15,9 @@ const Modal = ({ title, description, date, image, onClose }) => {
         top: '50%',
         left: '50%',
         transform: 'translate(-50%, -50%)',
+
         backgroundColor: 'wheat',
-        borderRadius: '8px',
+        borderRadius: '1rem',
         boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
         padding: '20px',
         zIndex: 999,
@@ -56,7 +57,12 @@ const Modal = ({ title, description, date, image, onClose }) => {
         <img
           src={image}
           alt="img"
-          style={{ maxWidth: '100%', maxHeight: '100%', objectFit: 'cover' }}
+          style={{
+            maxWidth: '100%',
+            maxHeight: '100%',
+            objectFit: 'cover',
+            borderRadius: '1rem',
+          }}
         />
       </div>
     </motion.div>

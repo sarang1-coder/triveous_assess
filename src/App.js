@@ -14,17 +14,19 @@ import store from './utils/store/store'
 
 function App() {
   return (
-    <Provider store={store}>
-      <AuthProvider>
-        <Router>
-          <Routes>
-            <Route path="/" element={<SignInSide />} />
-            <Route path="/signup" element={<SignUp />} />
-            <Route path="/home" element={<Home />} />
-          </Routes>
-        </Router>
-      </AuthProvider>
-    </Provider>
+    <div>
+      <Provider store={store}>
+        <AuthProvider>
+          <Router>
+            <Routes>
+              <Route path="/" element={<SignInSide />} />
+              <Route path="/signup" element={<SignUp />} />
+              <Route path="/home" element={<Home />} />
+            </Routes>
+          </Router>
+        </AuthProvider>
+      </Provider>
+    </div>
   )
 }
 
