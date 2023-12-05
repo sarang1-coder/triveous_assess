@@ -4,6 +4,8 @@ import { fetchData } from '../../utils/slice/dataSlice'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Modal, Backdrop } from './Modal'
 import { Button } from '@mui/material'
+import TopHeadlinesGrid from './TopHeadlinesGrid'
+import TopHeadlinesList from './TopHeadlinesList'
 
 const TopHeadlines = () => {
   const headerStyle = {
@@ -17,82 +19,75 @@ const TopHeadlines = () => {
 
   const [currentPage, setCurrentPage] = useState(1)
   const itemsPerPage = 6
-
   const [selectedId, setSelectedId] = useState(null)
   const [showModal, setShowModal] = useState(false)
   const dispatch = useDispatch()
+  const [viewType, setViewType] = useState('grid')
   const data = useSelector((state) => state.data.data)
   const loading = useSelector((state) => state.data.loading)
   const error = useSelector((state) => state.data.error)
-  const info = data.articles
+  const info = data?.articles
 
   useEffect(() => {
     dispatch(fetchData())
   }, [dispatch])
 
+  //   pagination Logic
   const indexOfLastItem = currentPage * itemsPerPage
   const indexOfFirstItem = indexOfLastItem - itemsPerPage
-  const currentItems = info.slice(indexOfFirstItem, indexOfLastItem)
+  const currentItems = info?.slice(indexOfFirstItem, indexOfLastItem)
 
   const paginate = (pageNumber) => {
     setCurrentPage(pageNumber)
     setSelectedId(null)
   }
 
-  const handleCloseModal = () => {
-    setSelectedId(null)
-    setShowModal(false)
-  }
-
   if (!info || !Array.isArray(info) || info.length === 0) {
     return <div>No data available</div>
+  }
+
+  const handleToggleView = () => {
+    setViewType(viewType === 'grid' ? 'list' : 'grid')
   }
 
   return (
     <div>
       &emsp;<h1 style={headerStyle}>Top Headlines</h1>
+      {/* Button to toggle view */}
       <div
         style={{
           display: 'flex',
-          flexWrap: 'wrap',
-          justifyContent: 'space-evenly',
+          justifyContent: 'center',
+          margin: '20px 0',
         }}
       >
-        {currentItems?.map((item, idx) => (
-          <motion.div
-            key={idx}
-            layoutId={idx}
-            onClick={() => setSelectedId(idx)}
-            style={{
-              backgroundColor: '#fff',
-              borderRadius: '8px',
-              boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
-              margin: '16px',
-              width: '300px',
-              cursor: 'pointer',
-              display: 'flex',
-              flexDirection: 'column',
-            }}
-          >
-            <div
-              style={{
-                backgroundImage: `url(${item.urlToImage})`,
-                backgroundSize: 'cover',
-                borderTopLeftRadius: '8px',
-                borderTopRightRadius: '8px',
-                height: '150px',
-                border: '1px solid black',
-              }}
-            ></div>
-            <div style={{ padding: '16px', flexGrow: 1 }}>
-              <h3 style={{ margin: '0', marginBottom: '8px' }}>{item.title}</h3>
-              <p style={{ margin: '0', color: '#666', fontSize: '14px' }}>
-                {item.author}
-              </p>
-            </div>
-          </motion.div>
-        ))}
+        <Button variant="outlined" onClick={handleToggleView}>
+          Switch to {viewType === 'grid' ? 'List' : 'Grid'} View
+        </Button>
+      </div>
+      {/* Grid View */}
+      <div
+        style={{
+          display: viewType === 'grid' ? 'flex' : 'block',
+          flexWrap: 'wrap',
+          justifyContent: viewType === 'grid' ? 'space-evenly' : 'flex-start',
+        }}
+      >
+        {viewType === 'grid' ? (
+          <TopHeadlinesGrid
+            currentItems={currentItems}
+            selectedId={selectedId}
+            setSelectedId={setSelectedId}
+          />
+        ) : (
+          <TopHeadlinesList
+            currentItems={currentItems}
+            selectedId={selectedId}
+            setSelectedId={setSelectedId}
+          />
+        )}
 
+        {/* show modal */}
         <AnimatePresence>
           {selectedId !== null && (
             <>
