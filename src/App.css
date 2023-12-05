@@ -1,0 +1,29 @@
+.App {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background-color: wheat;
+}
+
+.mainContent {
+  display: flex;
+  flex: 1;
+  margin-bottom: 10%;
+}
+
+.leftColumn {
+  flex: 4;
+  background-color: #f0f0f0;
+}
+.leftColumn img {
+  width: 50vw;
+  height: 100vh;
+}
+
+.rightColumn {
+  flex: 6;
+}
+
+.outletContainer {
+  margin: 0;
+}
