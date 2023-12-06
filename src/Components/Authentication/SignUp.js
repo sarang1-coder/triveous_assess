@@ -53,7 +53,6 @@ export default function SignUp() {
 
     const auth = getAuth()
     const firestore = getFirestore()
-    
 
     // Check password length
     if (password.length < 6) {
@@ -64,7 +63,6 @@ export default function SignUp() {
     try {
       const res = await createUserWithEmailAndPassword(auth, email, password)
       const user = res.user
-
       await addDoc(collection(firestore, 'users'), {
         uid: user.uid,
         name: displayName,
@@ -82,7 +80,6 @@ export default function SignUp() {
       }
     }
   }
-
 
   return (
     <ThemeProvider theme={defaultTheme}>

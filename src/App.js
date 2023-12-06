@@ -12,7 +12,6 @@ import { Provider } from 'react-redux'
 import store from './utils/store/store'
 import ProtectedRoute, { RequireAuth } from './utils/PrivateRoute'
 import { AuthProvider, UserAuthContextProvider } from './utils/useAuth'
-import MyCart from './Components/Layout/MyCart'
 
 function App() {
   return (
@@ -35,6 +34,7 @@ function App() {
           </UserAuthContextProvider>
         </Router>
       </Provider>
+      <Toaster/>
     </div>
   )
 }

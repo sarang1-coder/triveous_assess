@@ -1,7 +1,6 @@
 import React from 'react'
 import { motion } from 'framer-motion'
 import Topheadlines from './Topheadlines'
-import MyCart from './MyCart'
 
 export const Main = () => {
   const mainStyle = {

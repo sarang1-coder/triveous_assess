@@ -43,7 +43,9 @@ export default function SignInSide() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [errMessage, setErrMessage] = useState()
+
   
+
   const handleSubmit = async (e) => {
     e.preventDefault()
     const auth = getAuth()
