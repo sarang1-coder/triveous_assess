@@ -42,15 +42,15 @@ const defaultTheme = createTheme()
 export default function SignInSide() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  const navigate = useNavigate()
-
+  const [errMessage, setErrMessage] = useState()
+  
   const handleSubmit = async (e) => {
     e.preventDefault()
     const auth = getAuth()
     try {
       await signInWithEmailAndPassword(auth, email, password)
       toast.success('Sign-in Successful')
-      window.location.href = '/home';
+      window.location.href = '/home'
     } catch (err) {
       console.error(err)
       toast.error('Error signing in')

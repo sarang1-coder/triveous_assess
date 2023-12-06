@@ -17,6 +17,7 @@ import { firebaseAuth, db } from '../../utils/firebase'
 import { createTheme, ThemeProvider } from '@mui/material/styles'
 import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth'
 import { getFirestore, collection, addDoc } from 'firebase/firestore'
+import { checkValidData } from '../../utils/Validate'
 
 function Copyright(props) {
   return (
@@ -82,8 +83,6 @@ export default function SignUp() {
     }
   }
 
-  if (signin) {
-  }
 
   return (
     <ThemeProvider theme={defaultTheme}>
