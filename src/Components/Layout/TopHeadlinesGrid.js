@@ -1,9 +1,9 @@
-import React from 'react'
-import { motion } from 'framer-motion'
-import { Modal, Backdrop } from './Modal'
-import { Button } from '@mui/material'
+import React, { useState } from 'react';
+import { motion } from 'framer-motion';
 
 const TopHeadlinesGrid = ({ currentItems, selectedId, setSelectedId }) => {
+
+
   return (
     <>
       {currentItems?.map((item, idx) => (
@@ -24,6 +24,7 @@ const TopHeadlinesGrid = ({ currentItems, selectedId, setSelectedId }) => {
         >
           <div
             style={{
+              position: 'relative',
               backgroundImage: `url(${item.urlToImage})`,
               backgroundSize: 'cover',
               borderTopLeftRadius: '8px',
@@ -31,7 +32,9 @@ const TopHeadlinesGrid = ({ currentItems, selectedId, setSelectedId }) => {
               height: '150px',
               border: '1px solid black',
             }}
-          ></div>
+          >
+
+          </div>
           <div style={{ padding: '16px', flexGrow: 1 }}>
             <h3 style={{ margin: '0', marginBottom: '8px' }}>{item.title}</h3>
             <p style={{ margin: '0', color: '#666', fontSize: '14px' }}>
@@ -41,7 +44,7 @@ const TopHeadlinesGrid = ({ currentItems, selectedId, setSelectedId }) => {
         </motion.div>
       ))}
     </>
-  )
-}
+  );
+};
 
-export default TopHeadlinesGrid
+export default TopHeadlinesGrid;

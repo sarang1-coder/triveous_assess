@@ -1,8 +1,32 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { motion } from 'framer-motion'
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder'
+import FavoriteIcon from '@mui/icons-material/Favorite'
+import { addDoc, collection, Timestamp } from 'firebase/firestore'
+import { db } from '../../utils/firebase'
+import {toast} from 'react-hot-toast';
+
 
 const Modal = ({ title, description, date, image, onClose }) => {
-  console.log(description)
+  const [isSavedToFirestore, setIsSavedToFirestore] = useState(false)
+
+  const saveToFirestore = async () => {
+    try {
+      // Add data to Firestore collection
+      await addDoc(collection(db, 'newsapp'), {
+        title: title,
+        description: description,
+        image: image,
+        created_at: Timestamp.now(),
+      })
+      setIsSavedToFirestore(true)
+      toast.success("Information added succesfully")
+      console.log('Info store Firestore:', { title, description, image })
+    } catch (error) {
+      console.error('Error saving data to Firestore:', error)
+      toast.error("Error in adding data")
+    }
+  }
 
   return (
     <motion.div
@@ -15,7 +39,6 @@ const Modal = ({ title, description, date, image, onClose }) => {
         top: '50%',
         left: '50%',
         transform: 'translate(-50%, -50%)',
-
         backgroundColor: 'wheat',
         borderRadius: '1rem',
         boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
@@ -56,14 +79,35 @@ const Modal = ({ title, description, date, image, onClose }) => {
       <div style={{ flex: '1' }}>
         <img
           src={image}
-          alt="img"
+          alt={title}
           style={{
             maxWidth: '100%',
             maxHeight: '100%',
             objectFit: 'cover',
+            overflowBlock: 'none',
             borderRadius: '1rem',
           }}
         />
+      </div>
+
+      <div
+        style={{
+          position: 'absolute',
+          top: '1rem',
+          right: '1rem',
+          cursor: 'pointer',
+        }}
+      >
+        {isSavedToFirestore ? (
+          <FavoriteIcon style={{ color: 'red' }} />
+        ) : (
+          <FavoriteBorderIcon
+            onClick={() => {
+              saveToFirestore()
+            }}
+            style={{ color: 'red' }}
+          />
+        )}
       </div>
     </motion.div>
   )

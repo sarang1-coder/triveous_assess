@@ -6,7 +6,7 @@ export const Main = () => {
   const mainStyle = {
     minHeight: '100vh',
     overflowY: 'auto',
-    backgroundColor:'wheat'
+    backgroundColor: 'wheat',
   }
 
   const buttonStyle = {
@@ -39,36 +39,6 @@ export const Main = () => {
   return (
     <div style={mainStyle}>
       <div style={containerStyle}>
-        <div className="toggle_btn">
-          <motion.button
-            whileHover={{ scale: 1.1 }}
-            transition={{ type: 'spring', stiffness: 400, damping: 10 }}
-            style={buttonStyle}
-          >
-            Button 1
-          </motion.button>
-          <motion.button
-            whileHover={{ scale: 1.1 }}
-            transition={{ type: 'spring', stiffness: 400, damping: 10 }}
-            style={buttonStyle}
-          >
-            Button 2
-          </motion.button>
-          <motion.button
-            whileHover={{ scale: 1.1 }}
-            transition={{ type: 'spring', stiffness: 400, damping: 10 }}
-            style={buttonStyle}
-          >
-            Button 3
-          </motion.button>
-          <motion.button
-            whileHover={{ scale: 1.1 }}
-            transition={{ type: 'spring', stiffness: 400, damping: 10 }}
-            style={buttonStyle}
-          >
-            Button 4
-          </motion.button>
-        </div>
         <div className="search_txt">
           <input
             className="input_txt"

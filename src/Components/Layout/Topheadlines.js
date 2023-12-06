@@ -97,6 +97,7 @@ const TopHeadlines = () => {
                 date={info[selectedId]?.publishedAt}
                 image={info[selectedId]?.urlToImage}
                 onClose={() => setSelectedId(null)}
+               
               />
               <Backdrop onClick={() => setSelectedId(null)} />
             </>

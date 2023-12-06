@@ -12,6 +12,7 @@ const dataSlice = createSlice({
     data: [],
     loading: false,
     error: null,
+    cartItems: [],
   },
   reducers: {},
   extraReducers: (builder) => {
@@ -30,5 +31,11 @@ const dataSlice = createSlice({
       })
   },
 })
+
+export const {
+  addToFavourite,
+  removeAllFromCart,
+  removeFromCart,
+} = dataSlice.actions
 
 export default dataSlice.reducer
