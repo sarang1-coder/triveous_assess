@@ -38,16 +38,6 @@ export const Main = () => {
 
   return (
     <div style={mainStyle}>
-      <div style={containerStyle}>
-        <div className="search_txt">
-          <input
-            className="input_txt"
-            type="text"
-            placeholder="Search"
-            style={inputStyle}
-          />
-        </div>
-      </div>
       <Topheadlines />
     </div>
   )

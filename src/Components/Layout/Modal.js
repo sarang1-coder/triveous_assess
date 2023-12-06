@@ -2,29 +2,39 @@ import React, { useState } from 'react'
 import { motion } from 'framer-motion'
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder'
 import FavoriteIcon from '@mui/icons-material/Favorite'
-import { addDoc, collection, Timestamp } from 'firebase/firestore'
+import {
+  addDoc,
+  collection,
+  Timestamp,
+  deleteDoc,
+  doc,
+} from 'firebase/firestore'
+import { addToFirestore, deleteFromFirestore } from '../../utils/api/dbCalls'
 import { db } from '../../utils/firebase'
-import {toast} from 'react-hot-toast';
-
+import { toast } from 'react-hot-toast'
 
 const Modal = ({ title, description, date, image, onClose }) => {
   const [isSavedToFirestore, setIsSavedToFirestore] = useState(false)
 
   const saveToFirestore = async () => {
     try {
-      // Add data to Firestore collection
-      await addDoc(collection(db, 'newsapp'), {
-        title: title,
-        description: description,
-        image: image,
-        created_at: Timestamp.now(),
-      })
-      setIsSavedToFirestore(true)
-      toast.success("Information added succesfully")
-      console.log('Info store Firestore:', { title, description, image })
+      if (isSavedToFirestore) {
+        await deleteFromFirestore(title)
+        setIsSavedToFirestore(false)
+        toast.success('Information removed successfully')
+        return
+      }
+
+      const added = await addToFirestore(title, description, image)
+      if (added) {
+        setIsSavedToFirestore(true)
+        toast.success('Information added successfully')
+      } else {
+        toast.error('Error in adding data')
+      }
     } catch (error) {
-      console.error('Error saving data to Firestore:', error)
-      toast.error("Error in adding data")
+      console.error('Error saving/deleting data:', error)
+      toast.error('Error in saving/deleting data')
     }
   }
 
@@ -96,6 +106,9 @@ const Modal = ({ title, description, date, image, onClose }) => {
           top: '1rem',
           right: '1rem',
           cursor: 'pointer',
+        }}
+        onDoubleClick={() => {
+          deleteFromFirestore()
         }}
       >
         {isSavedToFirestore ? (

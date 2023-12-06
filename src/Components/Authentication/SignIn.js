@@ -1,6 +1,7 @@
 import React, { useContext, useState, useRef, useEffect } from 'react'
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth'
 import { firebaseAuth, provider } from '../../utils/firebase'
+import { useAuthState } from 'react-firebase-hooks/auth'
 import { checkValidData } from '../../utils/Validate'
 import Avatar from '@mui/material/Avatar'
 import Button from '@mui/material/Button'
@@ -39,8 +40,6 @@ function Copyright(props) {
 const defaultTheme = createTheme()
 
 export default function SignInSide() {
-  //   const [errMessage, setErrMessage] = useState()
-
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const navigate = useNavigate()
@@ -51,7 +50,7 @@ export default function SignInSide() {
     try {
       await signInWithEmailAndPassword(auth, email, password)
       toast.success('Sign-in Successful')
-      navigate('/home')
+      window.location.href = '/home';
     } catch (err) {
       console.error(err)
       toast.error('Error signing in')

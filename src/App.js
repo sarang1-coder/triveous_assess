@@ -8,29 +8,34 @@ import { Button } from '@mui/material'
 import SignInSide from './Components/Authentication/SignIn'
 import SignUp from './Components/Authentication/SignUp'
 import Home from './Components/Layout/Home'
-import { AuthProvider } from './utils/context'
 import { Provider } from 'react-redux'
 import store from './utils/store/store'
+import ProtectedRoute, { RequireAuth } from './utils/PrivateRoute'
+import { AuthProvider, UserAuthContextProvider } from './utils/useAuth'
 
 function App() {
   return (
     <div>
       <Provider store={store}>
-        <AuthProvider>
-          <Router>
+        <Router>
+          <UserAuthContextProvider>
             <Routes>
               <Route path="/" element={<SignInSide />} />
               <Route path="/signup" element={<SignUp />} />
-              <Route path="/home" element={<Home />} />
+              <Route
+                path="/home"
+                element={
+                  <ProtectedRoute>
+                    <Home />
+                  </ProtectedRoute>
+                }
+              />
             </Routes>
-          </Router>
-        </AuthProvider>
+          </UserAuthContextProvider>
+        </Router>
       </Provider>
     </div>
   )
 }
 
 export default App
-
-// abcd@gmail.com
-// abcd1234

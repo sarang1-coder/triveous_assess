@@ -12,6 +12,7 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined'
 import Typography from '@mui/material/Typography'
 import Container from '@mui/material/Container'
 import { toast } from 'react-hot-toast'
+import { useUserAuth } from '../../utils/useAuth'
 import { firebaseAuth, db } from '../../utils/firebase'
 import { createTheme, ThemeProvider } from '@mui/material/styles'
 import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth'
@@ -51,6 +52,7 @@ export default function SignUp() {
 
     const auth = getAuth()
     const firestore = getFirestore()
+    
 
     // Check password length
     if (password.length < 6) {

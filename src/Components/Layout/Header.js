@@ -1,5 +1,5 @@
-import React from 'react'
-import { getAuth, signOut } from 'firebase/auth'
+import React, { useEffect, useState } from 'react'
+import { getAuth, signOut, onAuthStateChanged } from 'firebase/auth'
 import Button from '@mui/material/Button'
 import { useNavigate } from 'react-router-dom'
 import Toolbar from '@mui/material/Toolbar'
@@ -10,6 +10,22 @@ import MenuIcon from '@mui/icons-material/Menu'
 
 const Header = () => {
   const navigate = useNavigate()
+  const [user, setUser] = useState(null)
+
+  useEffect(() => {
+    const auth = getAuth()
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      if (currentUser) {
+        setUser(currentUser)
+      } else {
+        setUser(null)
+      }
+    })
+
+    return () => {
+      unsubscribe()
+    }
+  }, [])
 
   const handleSignOut = async () => {
     const auth = getAuth()
@@ -37,9 +53,15 @@ const Header = () => {
           NEWS 20
         </Typography>
 
-        <Button color="inherit" onClick={handleSignOut}>
-          Logout
-        </Button>
+        {user ? (
+          <Button color="inherit" onClick={handleSignOut}>
+            Logout
+          </Button>
+        ) : (
+          <Button color="inherit" onClick={() => navigate('/signin')}>
+            Login
+          </Button>
+        )}
       </Toolbar>
     </AppBar>
   )

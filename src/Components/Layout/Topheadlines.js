@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { fetchData } from '../../utils/slice/dataSlice'
+import {  fetchData } from '../../utils/slice/dataSlice'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Modal, Backdrop } from './Modal'
 import { Button } from '@mui/material'
 import TopHeadlinesGrid from './TopHeadlinesGrid'
 import TopHeadlinesList from './TopHeadlinesList'
+
+
 
 const TopHeadlines = () => {
   const headerStyle = {
@@ -49,6 +51,8 @@ const TopHeadlines = () => {
   const handleToggleView = () => {
     setViewType(viewType === 'grid' ? 'list' : 'grid')
   }
+
+
 
   return (
     <div>
@@ -97,7 +101,7 @@ const TopHeadlines = () => {
                 date={info[selectedId]?.publishedAt}
                 image={info[selectedId]?.urlToImage}
                 onClose={() => setSelectedId(null)}
-               
+                
               />
               <Backdrop onClick={() => setSelectedId(null)} />
             </>
@@ -126,7 +130,7 @@ const TopHeadlines = () => {
             >
               {index + 1}
             </Button>
-          ),
+          )
         )}
       </div>
     </div>
