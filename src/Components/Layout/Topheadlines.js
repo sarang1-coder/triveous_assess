@@ -26,8 +26,8 @@ const TopHeadlines = () => {
   const data = useSelector((state) => state.data.data)
   const loading = useSelector((state) => state.data.loading)
   const error = useSelector((state) => state.data.error)
-  const info = data?.news.news
-  console.log('dd', data?.news.news[0].props.image)
+  const info = data?.news?.news
+  console.log('data', info && info[0]?.props?.image)
 
   useEffect(() => {
     dispatch(fetchData())
@@ -44,7 +44,18 @@ const TopHeadlines = () => {
   }
 
   if (!info || !Array.isArray(info) || info.length === 0) {
-    return <div>No data available</div>
+    return (
+      <div
+        style={{
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          minHeight: '200px',
+        }}
+      >
+        <div>No data available</div>
+      </div>
+    )
   }
 
   const handleToggleView = () => {

@@ -3,7 +3,12 @@ import { Outlet, Link } from 'react-router-dom'
 import UserContext from './utils/userContext'
 import { Toaster } from 'react-hot-toast'
 import './App.css'
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+} from 'react-router-dom'
 import { Button } from '@mui/material'
 import SignInSide from './Components/Authentication/SignIn'
 import SignUp from './Components/Authentication/SignUp'
@@ -30,11 +35,12 @@ function App() {
                   </ProtectedRoute>
                 }
               />
+              <Route path="*" element={<Navigate to="/" />} />
             </Routes>
           </UserAuthContextProvider>
         </Router>
       </Provider>
-      <Toaster/>
+      <Toaster />
     </div>
   )
 }
