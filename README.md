@@ -1,4 +1,7 @@
 # Triveous FrontEnd Assesnment (News App)
+
+# Access here-https://newsapp-67cd4.web.app
+
 # Fuctionalities
 * Authentication using Firebase with Login,Signup Pages and Protected Routes
 * Data fetching using React-Redux Library and display data with smooth UI/UX

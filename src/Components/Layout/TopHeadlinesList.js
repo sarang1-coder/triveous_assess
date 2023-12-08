@@ -21,6 +21,7 @@ const TopHeadlinesList = ({ currentItems, selectedId, setSelectedId }) => {
             cursor: 'pointer',
             display: 'flex',
             flexDirection: 'row',
+            overflow: 'hidden',
           }}
         >
           <div
@@ -31,11 +32,18 @@ const TopHeadlinesList = ({ currentItems, selectedId, setSelectedId }) => {
               borderBottomLeftRadius: '8px',
               width: '30%',
               minHeight: '150px',
+              flexShrink: 0,
             }}
           ></div>
           <div style={{ padding: '16px', width: '70%' }}>
             <h3 style={{ margin: '0', marginBottom: '8px' }}>{item.title}</h3>
-            <p style={{ margin: '0', color: '#666', fontSize: '14px' }}>
+            <p
+              style={{
+                margin: '0',
+                color: '#666',
+                fontSize: '0.8rem',
+              }}
+            >
               {item.source}
             </p>
           </div>

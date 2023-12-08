@@ -26,8 +26,8 @@ const TopHeadlines = () => {
   const data = useSelector((state) => state.data.data)
   const loading = useSelector((state) => state.data.loading)
   const error = useSelector((state) => state.data.error)
-  const info = data?.news?.news
-  console.log('data', info && info[0]?.props?.image)
+  let info = data?.news?.news
+  console.log('data', info)
 
   useEffect(() => {
     dispatch(fetchData())
@@ -43,7 +43,12 @@ const TopHeadlines = () => {
     setSelectedId(null)
   }
 
-  if (!info || !Array.isArray(info) || info.length === 0) {
+  if (
+    !data ||
+    !data.news ||
+    !Array.isArray(data.news.news) ||
+    data.news.news.length === 0
+  ) {
     return (
       <div
         style={{
