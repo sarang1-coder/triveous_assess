@@ -25,7 +25,8 @@ const TopHeadlinesGrid = ({ currentItems, selectedId, setSelectedId }) => {
           <div
             style={{
               position: 'relative',
-              backgroundImage: `url(${item.urlToImage})`,
+              backgroundImage: `url(${item.props.image})`,
+              cursor:'pointer',
               backgroundSize: 'cover',
               borderTopLeftRadius: '8px',
               borderTopRightRadius: '8px',
@@ -38,7 +39,7 @@ const TopHeadlinesGrid = ({ currentItems, selectedId, setSelectedId }) => {
           <div style={{ padding: '16px', flexGrow: 1 }}>
             <h3 style={{ margin: '0', marginBottom: '8px' }}>{item.title}</h3>
             <p style={{ margin: '0', color: '#666', fontSize: '14px' }}>
-              {item.author}
+              {item.source}
             </p>
           </div>
         </motion.div>

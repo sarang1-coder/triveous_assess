@@ -26,7 +26,8 @@ const TopHeadlines = () => {
   const data = useSelector((state) => state.data.data)
   const loading = useSelector((state) => state.data.loading)
   const error = useSelector((state) => state.data.error)
-  const info = data?.articles
+  const info = data?.news.news
+  console.log('dd', data?.news.news[0].props.image)
 
   useEffect(() => {
     dispatch(fetchData())
@@ -94,8 +95,8 @@ const TopHeadlines = () => {
               <Modal
                 title={info[selectedId]?.title}
                 description={info[selectedId]?.description}
-                date={info[selectedId]?.publishedAt}
-                image={info[selectedId]?.urlToImage}
+                date={info[selectedId]?.date}
+                image={info[selectedId]?.props.image}
                 onClose={() => setSelectedId(null)}
               />
               <Backdrop onClick={() => setSelectedId(null)} />

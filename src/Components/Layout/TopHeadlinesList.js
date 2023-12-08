@@ -25,7 +25,7 @@ const TopHeadlinesList = ({ currentItems, selectedId, setSelectedId }) => {
         >
           <div
             style={{
-              backgroundImage: `url(${item.urlToImage})`,
+              backgroundImage: `url(${item.props.image})`,
               backgroundSize: 'cover',
               borderTopLeftRadius: '8px',
               borderBottomLeftRadius: '8px',
@@ -36,7 +36,7 @@ const TopHeadlinesList = ({ currentItems, selectedId, setSelectedId }) => {
           <div style={{ padding: '16px', width: '70%' }}>
             <h3 style={{ margin: '0', marginBottom: '8px' }}>{item.title}</h3>
             <p style={{ margin: '0', color: '#666', fontSize: '14px' }}>
-              {item.author}
+              {item.source}
             </p>
           </div>
         </motion.div>
